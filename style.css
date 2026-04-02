@@ -1,0 +1,21 @@
+body {
+	background: skyblue;
+}
+h1 {
+	color: white;
+}
+
+#world{
+  position: relative;
+  width: 800px;
+  height: 600px;
+  border: 2px solid black;
+}
+
+.player{
+  position: absolute;
+}
+
+img{
+  image-rendering: pixelated;
+}
