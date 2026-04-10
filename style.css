@@ -5,11 +5,16 @@ h1 {
 	color: white;
 }
 
+.objekt {
+  text-align: center;
+}
+
 #world{
   position: relative;
   width: 800px;
   height: 600px;
   border: 2px solid black;
+  background: bisque;
 }
 
 .player{
