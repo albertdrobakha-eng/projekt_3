@@ -1,7 +1,7 @@
 console.log("Wworld")
 
 
-
+// 16.04.26
 
 
 async function loadWorld() {
@@ -35,11 +35,7 @@ loadWorld().then(state => {
   }
 });
 
-
-
-
-
-
+  //
 
 
 
