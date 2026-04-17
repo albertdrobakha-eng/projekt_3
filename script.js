@@ -22,18 +22,44 @@ loadWorld().then(state => {
     playerDiv.style.left = player.x + 'px';
     playerDiv.style.top = player.y + 'px';
 
+
     const img = document.createElement('img');
 
-  
     img.src = 'https://tinkr.tech' + player.image;
-
     img.width = player.width;
     img.height = player.height;
+    img.style.imageRendering = 'pixelated';
 
-    playerDiv.appendChild(img);
+    playerDiv.appendChild(img); 
+
+//nimi 17.04
+
+    const name = document.createElement('div')
+    name.textContent = player.username;
+    name.style.fontSize = '12px',
+    name.style.textAlign = 'center';
+
+    playerDiv.appendChild(name);
+
+    if (player.message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.textContent = player.message;
+
+      messageDiv.style.position = 'absolute';
+      messageDiv.style.bottom = '100%';
+      messageDiv.style.background = 'white';
+      messageDiv.style.border = '1px solid black';
+      messageDiv.style.fontSize = '10px';
+      messageDiv.style.padding = '3px';
+
+      playerDiv.appendChild(messageDiv)
+    }
+
     world.appendChild(playerDiv);
   }
 });
+
+
 
   //
 
