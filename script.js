@@ -1,21 +1,29 @@
 console.log("Wworld")
 
+const url = 'https://tinkr.tech/sdb/poly/wander'
 
 // 16.04.26
 
 
 async function loadWorld() {
-  const response = await fetch('https://tinkr.tech/sdb/poly/wander');
+  const response = await fetch(url);
   const state = await response.json();
 
   console.log(state);
   return state;
 }
 
-loadWorld().then(state => {
+function render(state) {
   const world = document.getElementById('world');
 
+  world.innerHTML = ''; // 
+
   for (const player of state.players) {
+    
+
+
+
+
     const playerDiv = document.createElement('div');
 
     playerDiv.style.position = 'absolute';
@@ -57,37 +65,30 @@ loadWorld().then(state => {
 
     world.appendChild(playerDiv);
   }
+};
+
+
+setInterval(async function() {
+  const state = await loadWorld();
+  render(state);
+}, 1700);
+
+fetch(' ', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    action: 'join',
+    username: 'ad'
+  })
 });
 
 
 
-  //
 
 
 
-const newDiv = document.createElement('div');
-newDiv.textContent = 'I am new!';
-
-parent.appendChild(newDiv);
-
-
-
-
-
-// Set properties
-newDiv.textContent = 'Hello!';
-newDiv.classList.add('my-class');
-
-// Add to page
-document.body.appendChild(newDiv);
-
-
-const timer = setInterval(function() {
-  console.log("Running...");
-}, 1000);
-
-// Later, stop it:
-clearInterval(timer);
 
 
 
