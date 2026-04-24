@@ -2,6 +2,31 @@ console.log("Wworld")
 
 const url = 'https://tinkr.tech/sdb/poly/wander'
 
+
+
+let playerKey; 
+
+async function joinGame() {
+  const response = await fetch('url', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      action: 'join',
+      username: 'Alberto'
+    })
+  });
+
+  const data = await response.json();
+  console.log(data);
+
+  playerKey = data.player_key; 
+}
+
+
+
+
 // 16.04.26
 
 
@@ -20,8 +45,6 @@ function render(state) {
 
   for (const player of state.players) {
     
-
-
 
 
     const playerDiv = document.createElement('div');
@@ -68,21 +91,37 @@ function render(state) {
 };
 
 
+
+
+world.onclick = async function(e) {
+  if (!playerKey) return;
+
+  await fetch('url', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      action: 'move',
+      player_key: playerKey,
+      x: e.offsetX,
+      y: e.offsetY
+    })
+  });
+};
+
+
+
+
+
+
+
 setInterval(async function() {
   const state = await loadWorld();
   render(state);
 }, 1700);
 
-fetch(' ', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    action: 'join',
-    username: 'ad'
-  })
-});
+
+
+
 
 
 
