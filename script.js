@@ -4,10 +4,12 @@ const url = 'https://tinkr.tech/sdb/poly/wander'
 
 
 
-let playerKey; 
+let playerKey = localStorage.getItem('player_key'); 
+
+
 
 async function joinGame() {
-  const response = await fetch('url', {
+  const response = await fetch(url, {  
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -21,7 +23,10 @@ async function joinGame() {
   const data = await response.json();
   console.log(data);
 
-  playerKey = data.player_key; 
+  if (data.player_key) {
+    playerKey = data.player_key;
+    localStorage.setItem('player_key', playerKey);  
+  }
 }
 
 
@@ -41,12 +46,10 @@ async function loadWorld() {
 function render(state) {
   const world = document.getElementById('world');
 
-  world.innerHTML = ''; // 
+  world.innerHTML = ''; 
 
   for (const player of state.players) {
     
-
-
     const playerDiv = document.createElement('div');
 
     playerDiv.style.position = 'absolute';
@@ -63,7 +66,7 @@ function render(state) {
 
     playerDiv.appendChild(img); 
 
-//nimi 17.04
+
 
     const name = document.createElement('div')
     name.textContent = player.username;
@@ -93,22 +96,49 @@ function render(state) {
 
 
 
+const world = document.getElementById('world');   
+
 world.onclick = async function(e) {
   if (!playerKey) return;
 
-  await fetch('url', {
+  const rect = world.getBoundingClientRect();   
+
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  await fetch(url, {   
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       action: 'move',
       player_key: playerKey,
-      x: e.offsetX,
-      y: e.offsetY
+      x: x,
+      y: y
     })
   });
 };
 
 
+
+
+async function sendMessage() {
+  const input = document.getElementById('messageInput');
+
+  if (!playerKey) return;
+  if (!input.value) return;
+
+  await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      action: 'talk',
+      player_key: playerKey,
+      message: input.value
+    })
+  });
+
+  input.value = '';  
+}
 
 
 
@@ -117,19 +147,13 @@ world.onclick = async function(e) {
 setInterval(async function() {
   const state = await loadWorld();
   render(state);
-}, 1700);
+}, 1000);    // FIX: было 1700
 
 
 
 
 
-
-
-
-
-
-
-
+joinGame(); 
 
 
 

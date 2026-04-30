@@ -10,10 +10,10 @@ h1 {
 }
 
 #world{
+  width: 800px;
+  height: 600px;
   position: relative;
-  width: 1500px;
-  height: 1000px;
-  border: 2px solid black;
+  overflow: hidden;
   background: bisque;
 }
 
