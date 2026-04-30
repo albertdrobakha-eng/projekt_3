@@ -147,7 +147,7 @@ async function sendMessage() {
 setInterval(async function() {
   const state = await loadWorld();
   render(state);
-}, 1000);    // FIX: было 1700
+}, 1000);    
 
 
 
