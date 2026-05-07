@@ -1,4 +1,4 @@
-console.log("Wworld")
+
 
 const url = 'https://tinkr.tech/sdb/poly/wander'
 
@@ -144,6 +144,7 @@ async function sendMessage() {
 
 
 
+
 setInterval(async function() {
   const state = await loadWorld();
   render(state);
@@ -153,9 +154,7 @@ setInterval(async function() {
 
 
 
+
+
 joinGame(); 
-
-
-
-
 
