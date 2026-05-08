@@ -3,9 +3,7 @@
 const url = 'https://tinkr.tech/sdb/poly/wander'
 
 
-
 let playerKey = localStorage.getItem('player_key'); 
-
 
 
 async function joinGame() {
@@ -16,7 +14,7 @@ async function joinGame() {
     },
     body: JSON.stringify({
       action: 'join',
-      username: 'Alberto'
+      username: 'Alberto' + Math.floor(Math.random() * 1000)
     })
   });
 
@@ -46,9 +44,14 @@ async function loadWorld() {
 function render(state) {
   const world = document.getElementById('world');
 
+
   world.innerHTML = ''; 
 
   for (const player of state.players) {
+
+
+console.log(player);
+
     
     const playerDiv = document.createElement('div');
 
@@ -58,6 +61,7 @@ function render(state) {
 
 
     const img = document.createElement('img');
+
 
     img.src = 'https://tinkr.tech' + player.image;
     img.width = player.width;
@@ -153,8 +157,8 @@ setInterval(async function() {
 
 
 
+joinGame();
 
 
 
-joinGame(); 
 
